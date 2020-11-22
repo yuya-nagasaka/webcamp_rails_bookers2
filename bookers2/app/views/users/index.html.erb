@@ -1,0 +1,20 @@
+
+<%#　プロフィール編集　%>
+
+<h2>User Info</h2>
+<%= image_tag('no_image.jpg') %>
+<%= @user.name %>
+<%= @user.introduction %>
+
+
+<%# 新規投稿 %>
+  <div>
+    <%= form_with model: @book, local:true do |f| %>
+      <h2>New Book</h2>
+      <h4>title</h4>
+      <%= f.text_field :title %>
+      <h4>opinion</h4>
+      <%= f.text_area :body %>
+      <%= f.submit 'Create Book' %>
+    <% end %>
+  </div>
