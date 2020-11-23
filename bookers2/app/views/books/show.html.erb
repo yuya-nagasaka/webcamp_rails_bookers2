@@ -1,3 +1,24 @@
+<%#　プロフィール編集　%>
+
+<h2>User Info</h2>
+<%= attachment_image_tag @user, :profile_image,:fill,60,60,fallback:"no_image.jpg"%>
+<p>name<%= @user.name %></p>
+<p>introduction<%= @user.introduction %></p>
+<button><%= link_to "Edit",edit_user_path(current_user.id) %></button>
+
+<%# 新規投稿 %>
+  <div>
+    <%= form_with model: @book, local:true do |f| %>
+      <h2>New Book</h2>
+      <h4>title</h4>
+      <%= f.text_field :title %>
+      <h4>opinion</h4>
+      <%= f.text_area :body %>
+      <%= f.submit 'Create Book' %>
+    <% end %>
+  </div>
+
+
 <h2>Book detail</h2>
 <p><%= @book.title %></p>
 <p><%= @book.body %></p>

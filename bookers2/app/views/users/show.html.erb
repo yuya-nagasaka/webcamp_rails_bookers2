@@ -1,11 +1,17 @@
-<%#　プロフィール編集　%>
+<%# 共通部分　↓　%>
 
+<%#　プロフィール編集　%>
 <h2>User Info</h2>
+<%= attachment_image_tag current_user, :profile_image, size: "60×60", fallback: "no_image.jpg"%>
+<p>name<%= current_user.name %></p>
+<p>introduction<%= current_user.introduction %></p>
+<button><%= link_to "Edit",edit_user_path(current_user.id) %></button>
+
 
 <%# 新規投稿 %>
- <div>
+  <div>
     <%= form_with model: @book, local:true do |f| %>
-      <h2>New Book
+      <h2>New Book</h2>
       <h4>title</h4>
       <%= f.text_field :title %>
       <h4>opinion</h4>
@@ -13,3 +19,20 @@
       <%= f.submit 'Create Book' %>
     <% end %>
   </div>
+
+<%# 共通部分　↑ %>
+
+<%# 投稿一覧 %>
+  <h2>Books</h2>
+<table>
+  <tr>
+    <th>title</th>
+    <th>opinion</th>
+  </tr>
+  <% @books.each do |book| %>
+  <tr>
+    <td><%= book.title %></td>
+    <td><%= book.body %></td>
+  </tr>
+  <% end %>
+</table>
