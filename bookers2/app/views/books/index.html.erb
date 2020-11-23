@@ -2,7 +2,7 @@
 
 <%#　プロフィール編集　%>
 <h2>User Info</h2>
-<%= attachment_image_tag current_user, :profile_image, size: "60×60", fallback: "no_image.jpg"%>
+<%= attachment_image_tag current_user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
 <p>name<%= current_user.name %></p>
 <p>introduction<%= current_user.introduction %></p>
 <button><%= link_to "Edit",edit_user_path(current_user.id) %></button>
@@ -32,7 +32,7 @@
   </tr>
   <% @users.each do |user|%>
   <tr>
-    <td><%= user.profile_image %></td>
+    <td><%= attachment_image_tag user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
   </tr>
   <% end %>
   <% @books.each do |book| %>

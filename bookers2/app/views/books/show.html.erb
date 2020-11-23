@@ -1,9 +1,9 @@
 <%#　プロフィール編集　%>
 
 <h2>User Info</h2>
-<%= attachment_image_tag @user, :profile_image,:fill,60,60,fallback:"no_image.jpg"%>
-<p>name<%= @user.name %></p>
-<p>introduction<%= @user.introduction %></p>
+<%= attachment_image_tag current_user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
+<p>name<%= current_user.name %></p>
+<p>introduction<%= current_user.introduction %></p>
 <button><%= link_to "Edit",edit_user_path(current_user.id) %></button>
 
 <%# 新規投稿 %>
@@ -20,5 +20,9 @@
 
 
 <h2>Book detail</h2>
-<p><%= @book.title %></p>
-<p><%= @book.body %></p>
+<%= current_user.name %>
+<%= attachment_image_tag current_user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
+<%= @book.title %>
+<%= @book.body %>
+<button><%= link_to "edit",edit_user_path(current_user.id) %></button>
+<button><%= link_to "destroy" %></button>
