@@ -8,13 +8,13 @@
 
 <%# 新規投稿 %>
   <div>
-    <%= form_with model: @book, local:true do |f| %>
+    <%= form_with model: @new_book, local:true do |f| %>
       <h2>New Book</h2>
       <h4>title</h4>
       <%= f.text_field :title %>
       <h4>opinion</h4>
       <%= f.text_area :body %>
-      <%= f.submit 'Create Book' %>
+      <p><%= f.submit 'Create Book' %></p>
     <% end %>
   </div>
 
@@ -22,7 +22,9 @@
 <h2>Book detail</h2>
 <%= current_user.name %>
 <%= attachment_image_tag current_user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
-<%= @book.title %>
+<%= link_to "#{@book.title}",book_path(@book) %>
 <%= @book.body %>
-<button><%= link_to "edit",edit_user_path(current_user.id) %></button>
-<button><%= link_to "destroy" %></button>
+  <% if @book.id == current_user.id %>
+    <button><%= link_to "edit",edit_user_path(current_user.id) %></button>
+    <button><%= link_to "destroy" %></button>
+  <% end %>

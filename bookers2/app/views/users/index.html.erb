@@ -17,8 +17,31 @@
       <%= f.text_field :title %>
       <h4>opinion</h4>
       <%= f.text_area :body %>
-      <%= f.submit 'Create Book' %>
+      <p><%= f.submit 'Create Book' %></p>
     <% end %>
   </div>
 
 <%# 共通部分　↑ %>
+
+<%# ユーザー一覧　%>
+
+<h2>Users</h2>
+<table>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <% @users.each do |user|%>
+  <tbody>
+    <tr>
+      <td><%= attachment_image_tag user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
+      <td><%= user.name %></td>
+      <td><%= link_to "show",user_path(user) %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
