@@ -1,3 +1,19 @@
+
+<%
+=begin エラー文
+
+%>
+<% if @new_book.errors.any? %>
+  <h2><%= pluralize(@new_book.errors.count, "error") %> prohibited this product from being saved:</h2>
+    <% @new_book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+ <% end %>
+<%
+
+=end
+%>
+
 <%# 共通部分　↓　%>
 
 <%#　プロフィール編集　%>
@@ -36,7 +52,7 @@
     <% @books.zip(@users).each do |book,user| %>
     <tr>
       <td><%= attachment_image_tag user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
-      <td><%= link_to "#{book.title}",book_path(book) %></td>
+      <td><%= link_to "#{book.title}",books_path %></td>
       <td><%= book.body %></td>
     </tr>
     <% end %>

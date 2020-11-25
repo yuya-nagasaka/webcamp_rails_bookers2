@@ -20,11 +20,13 @@
 
 
 <h2>Book detail</h2>
-<%= current_user.name %>
+<%#><% if @book.user_id == @user.id %>
 <%= attachment_image_tag current_user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
+<%= link_to "#{current_user.name}",user_path(current_user) %>
 <%= link_to "#{@book.title}",book_path(@book) %>
 <%= @book.body %>
-  <% if @book.id == current_user.id %>
-    <button><%= link_to "edit",edit_user_path(current_user.id) %></button>
-    <button><%= link_to "destroy" %></button>
-  <% end %>
+<%#><% end %>
+<% if @book.user_id == current_user.id %>
+  <button><%= link_to "edit",edit_book_path(@book) %></button>
+  <button><%= link_to "destroy",book_path(@book),method: :delete,"data-confirm"=>"本当に消しますか"%></button>
+<% end %>

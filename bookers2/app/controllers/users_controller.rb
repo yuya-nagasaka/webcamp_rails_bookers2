@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+before_action :authenticate_user!
+
   def index
     @new_book=Book.new
     @users=User.all
@@ -8,14 +10,14 @@ class UsersController < ApplicationController
   def show
     @new_book=Book.new
     @book = Book.find(params[:id])
-    @books=Book.all
     @user=User.find(params[:id])
+    @books =@user.books
   end
 
   def create
     new_book = Book.new(book_params)
     new_book.user_id=current_user.id
-    nbook.save
+    new_book.save
     redirect_to book_path(book.id)
   end
 
