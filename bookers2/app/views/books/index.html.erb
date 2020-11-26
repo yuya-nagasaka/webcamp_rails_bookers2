@@ -1,23 +1,33 @@
+<%# ログイン　サクセス・エラーメッセージ　%>
+<% if notice %>
+　　<p><%= notice %></p>
+<% end %>
+<% if alert %>
+<p><%= alert %></p>
+<% end %>
 
-<%
-=begin エラー文
-
-%>
-<% if @new_book.errors.any? %>
-  <h2><%= pluralize(@new_book.errors.count, "error") %> prohibited this product from being saved:</h2>
-    <% @new_book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-    <% end %>
+<%#　エラーメッセージ(新規投稿時・更新時)　%>
+ <% if flash[:danger] %>
+ <%= flash[:danger] %>
  <% end %>
-<%
 
-=end
-%>
+<%# 新規投稿・更新　バリデーションチェック　エラー　%>
+
+<% if @book.errors.any? %>
+  <%= pluralize(@book.errors.count, "error") %> prohibited this product from being saved:</p>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+
 
 <%# 共通部分　↓　%>
 
 <%#　プロフィール編集　%>
-<h2>User Info</h2>
+<h2>User Info</h2>s
 <%= attachment_image_tag current_user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
 <p>name<%= current_user.name %></p>
 <p>introduction<%= current_user.introduction %></p>
@@ -26,7 +36,7 @@
 
 <%# 新規投稿 %>
   <div>
-    <%= form_with model: @new_book, local:true do |f| %>
+    <%= form_with model: @book, local:true do |f| %>
       <h2>New Book</h2>
       <h4>title</h4>
       <%= f.text_field :title %>
@@ -49,10 +59,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @books.zip(@users).each do |book,user| %>
+    <% @books.each do |book| %>
     <tr>
-      <td><%= attachment_image_tag user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
-      <td><%= link_to "#{book.title}",books_path %></td>
+      <td><%= attachment_image_tag book.user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
+      <td><%= link_to "#{book.title}",book_path(book) %></td>
       <td><%= book.body %></td>
     </tr>
     <% end %>

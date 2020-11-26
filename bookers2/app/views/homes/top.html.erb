@@ -1,9 +1,12 @@
+<% if notice %>
+<p><%= notice %></p>
+<% end %>
 <h1>welcome to Bookers !!</h1>
 <p>In <steong>Bookers</strong>,</br>
 you can share and exchange your opinions , inpressions , and emotions</br>
 about various books!</p>
 
-<p><button><%= link_to "Login", new_user_session_path %></button></p>
+<p><button><%= link_to "Log in", new_user_session_path %></button></p>
 
 <p><button><%= link_to "Sign up",new_user_registration_path %></button></p>
 <p>CopyRight Infratop.inc</p>

@@ -1,3 +1,23 @@
+<%# 　プロフィール更新　バリデーションチェック　エラー　%>
+<% if @user.errors.any? %>
+  <%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</p>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+
+<%# プロフィール編集サクセスメッセージ・エラーメッセージ %>
+
+<% if flash[:success] %>
+<%= flash[:success] %>
+<% end %>
+
+<% if flash[:danger] %>
+<%= flash[:danger] %>
+<% end %>
 <%# 共通部分　↓　%>
 
 <%#　プロフィール編集　%>

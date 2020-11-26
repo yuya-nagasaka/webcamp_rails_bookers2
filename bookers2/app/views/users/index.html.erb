@@ -11,7 +11,7 @@
 
 <%# 新規投稿 %>
   <div>
-    <%= form_with model: @new_book, local:true do |f| %>
+    <%= form_with model: @book, local:true do |f| %>
       <h2>New Book</h2>
       <h4>title</h4>
       <%= f.text_field :title %>
