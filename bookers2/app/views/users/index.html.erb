@@ -1,44 +1,56 @@
 <html>
   <body>
-    <%# 共通部分　↓　%>
-    <%#　プロフィール編集　%>
-    <h2>User Info</h2>
-    <%= attachment_image_tag current_user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
-    <p>name<%= current_user.name %></p>
-    <p>introduction<%= current_user.introduction %></p>
-    <button><a href=/users/<%= current_user.id %>/edit><i class="fas fa-user-cog"></i></a></button>
-    <%# 新規投稿 %>
-    <div>
-      <%= form_with model: @book, local:true do |f| %>
-        <h2>New Book</h2>
-        <h4>title</h4>
-        <%= f.text_field :title %>
-        <h4>opinion</h4>
-        <%= f.text_area :body %>
-        <p><%= f.submit 'Create Book' %></p>
-      <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1 w-100">
+        </div>
+        <div class="col-md-3 w-75">
+        <%# 共通部分　↓　%>
+        <%#　プロフィール編集　%>
+          <h2>User Info</h2>
+          <%= attachment_image_tag current_user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
+          <p class="border-top border-bottom w-75">name<%= current_user.name %></p>
+          <p>introduction<%= current_user.introduction %></p>
+          <button class="w-75 bg-light"><a href=/users/<%= current_user.id %>/edit><i class="fas fa-user-cog text-secondary"></i></a></button>
+          <%# 新規投稿 %>
+          <div>
+            <%= form_with model: @book, local:true do |f| %>
+              <h4>New Book</h4>
+              <p>title</p>
+              <%= f.text_field :title %>
+              <p>opinion</p>
+              <%= f.text_area :body %>
+              <p><%= f.submit 'Create Book', class:"bg-success text-light"%></p>
+            <% end %>
+          </div>
+        </div>
+
+        <%# 共通部分　↑ %>
+        <%# ユーザー一覧　%>
+        <div class="col-md-8">
+          <h2>Users</h2>
+          <table class="w-100">
+            <thead>
+              <tr class="border-top">
+                <th>image</th>
+                <th>name</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <% @users.each do |user|%>
+              <tbody>
+                <tr class="border-top">
+                  <td><%= attachment_image_tag user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
+                  <td><%= user.name %></td>
+                  <td><%= link_to "show",user_path(user) %></td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+      </div>
     </div>
-    <%# 共通部分　↑ %>
-    <%# ユーザー一覧　%>
-    <h2>Users</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>image</th>
-          <th>name</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <% @users.each do |user|%>
-      <tbody>
-        <tr>
-          <td><%= attachment_image_tag user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
-          <td><%= user.name %></td>
-          <td><%= link_to "show",user_path(user) %></td>
-        </tr>
-      </tbody>
-      <% end %>
-    </table>
+    <p class= 'text-center pt-5'> CopyRight Infratop.inc</p>
   </body>
 </html>
 

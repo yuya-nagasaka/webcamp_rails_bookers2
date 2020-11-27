@@ -9,41 +9,45 @@
   </head>
   <body>
     <header>
-      <p>Bookers</p>
-      <%#　ログイン時　%>
-      <% if user_signed_in? %>
-        <li>
-          <a href=/users/<%= current_user.id %>><i class='fas fa-home'></i>Home</a>
-        </li>
-        <li>
-          <a href=/users><i class="fas fa-users"></i>Users</a>
-        <li>
-          <a href=/books ><i class="fas fa-book-open"></i>Books</a>
-        </li>
-        <li>
-          <%= link_to "logout",destroy_user_session_path, method: :delete%>
-          <%#　処理手順がわからない %>
-        </li>
-      <%#　ログアウト時　%>
-      <% else %>
-        <li>
-           <a href=/><i class="fas fa-home"></i>Home</a>
-        </li>
-        <li>
-          <a href=/home/about><i class="fas fa-link"></i>About</a>
-        </li>
-        <li>
-          <a href=/users/sign_up><i class="fas fa-user-plus"></i>sign up</a>
-        </li>
-        <li>
-          <a href=/users/sign_in><i class="fas fa-sign-out-alt"></i>login</a>
-        </li>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mx-auto" style="width: 400px;" href="/">Bookers</a>
+
+        <%#　ログイン時　%>
+        <% if user_signed_in? %>
+          <ul type="none" class="list-inlin mx-auto " style="width: 400px;" >
+            <li class="list-inline-item">
+              <a href=/users/<%= current_user.id %>><i class='fas fa-home text-light'>Home</i></a>
+            </li>
+            <li  class="list-inline-item">
+              <a href=/users><i class="fas fa-users text-light">Users</i></a>
+            <li  class="list-inline-item">
+              <a href=/books ><i class="fas fa-book-open text-light">Books</i></a>
+            </li>
+            <li  class="list-inline-item">
+              <%= link_to "logout",destroy_user_session_path, method: :delete%>
+            <%#　処理手順がわからない %>
+            </li>
+          </ul>
+        <%#　ログアウト時　%>
+        <% else %>
+          <ul type="none" class="list-inlin mx-auto " style="width: 400px;" >
+            <li  class="list-inline-item ">
+               <a href=/><i class="fas fa-home text-light ">Home</i></a>
+            </li>
+            <li  class="list-inline-item">
+              <a href=/home/about><i class="fas fa-link text-light">About</i></a>
+            </li>
+            <li  class="list-inline-item">
+              <a href=/users/sign_up><i class="fas fa-user-plus text-light">sign up</i></a>
+            </li>
+            <li  class="list-inline-item">
+              <a href=/users/sign_in><i class="fas fa-sign-in-alt text-light"></i> login</i></a>
+            </li>
+          </ul>
+        <% end %>
+      </nav>
   　</header>
 
     <%= yield %>
-    <footer>
-  　 <p> CopyRight Infratop.inc</p>
-  　</footer>
   </body>
 </html>

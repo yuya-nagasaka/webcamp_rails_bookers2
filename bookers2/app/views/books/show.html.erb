@@ -13,34 +13,45 @@
     <% if flash[:success] %>
       <%= flash[:success] %>
     <% end %>
-    <%#　プロフィール画面 %>
-    <h2>User Info</h2>
-    <%= attachment_image_tag @book.user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
-    <p>name<%= @book.user.name %></p>
-    <p>introduction<%= @book.user.introduction %></p>
-     <% if @user.id == current_user.id %>
-         <button><a href=/users/<%= current_user.id %>/edit><i class="fas fa-user-cog"></i></a></button>
-     <% end %>
-    <%# 新規投稿 %>
-    <div>
-      <%= form_with model: @new_book, local:true do |f| %>
-        <h2>New Book</h2>
-        <h4>title</h4>
-        <%= f.text_field :title %>
-        <h4>opinion</h4>
-        <%= f.text_area :body %>
-        <p><%= f.submit 'Create Book' %></p>
-      <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1 w-100">
+        </div>
+        <div class="col-md-3 w-100">
+          <%#　プロフィール画面 %>
+          <h2>User Info</h2>
+          <%= attachment_image_tag @book.user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
+          <p class="w-75 border-top border-bottom">name<%= @book.user.name %></p>
+          <p>introduction<%= @book.user.introduction %></p>
+          <% if @book.user.id == current_user.id %>
+            <button class="w-75 bg-light"><a href=/users/<%= current_user.id %>/edit><i class="fas fa-user-cog text-secondary"></i></a></button>
+          <% end %>
+          <%# 新規投稿 %>
+          <%= form_with model: @new_book, local:true do |f| %>
+            <h4>New Book</h4>
+            <p>title</p>
+            <%= f.text_field :title %>
+            <p>opinion</p>
+            <%= f.text_area :body %>
+            <p><%= f.submit 'Create Book', class:"bg-success text-light"%></p>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <%# 詳細画面 %>
+          <h2>Book detail</h2>
+            <div class="border-top">
+              <%= attachment_image_tag @book.user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
+              <%= link_to "#{@book.user.name}",user_path(@book.user) %>
+              <%= link_to "#{@book.title}",book_path(@book.id) %>
+              <%= @book.body %>
+              <% if @book.user_id == current_user.id %>
+              <button class="bg-success"><%= link_to "Edit",edit_book_path(@book),class:" text-white" %></button>
+              <button class="bg-danger"><%= link_to "Destroy",book_path(@book),method: :delete,"data-confirm"=>"本当に消しますか",class:" text-white"%></button>
+              <% end %>
+            </div>
+        </div>
+      </div>
     </div>
-    <%# 詳細画面 %>
-    <h2>Book detail</h2>
-    <%= attachment_image_tag @book.user, :profile_image,size: "60x60",fallback:"no_image.jpg"%>
-    <%= link_to "#{@book.user.name}",user_path(@book.user) %>
-    <%= link_to "#{@book.title}",book_path(@book.id) %>
-    <%= @book.body %>
-    <% if @book.user_id == current_user.id %>
-      <button><%= link_to "edit",edit_book_path(@book) %></button>
-      <button><%= link_to "destroy",book_path(@book),method: :delete,"data-confirm"=>"本当に消しますか"%></button>
-    <% end %>
+    <p class= 'text-center pt-5'> CopyRight Infratop.inc</p>
   </body>
 </html>

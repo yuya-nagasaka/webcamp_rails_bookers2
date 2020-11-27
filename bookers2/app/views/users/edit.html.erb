@@ -1,8 +1,22 @@
-<h2>User info</h2>
-<%= form_with model:@user, local:true do |f| %>
-  <p>Name</p><%= f.text_field :name %>
-  <p>image</p><%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
-  <p>introduction</p><%= f.text_area :introduction %>
-  <p><%= f.submit "Update User" %></p>
-<% end %>
-<p>CopyRight Infratop.inc</p>
+<html>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 w-100">
+        </div>
+        <div class="col-md-4 w-100">
+          <h2>User info</h2>
+          <%= form_with model:@user, local:true do |f| %>
+            <p>Name</p><%= f.text_field :name %>
+            <p>image</p><%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+            <p>introduction</p><%= f.text_area :introduction %>
+            <p><%= f.submit "Update User" %></p>
+          <% end %>
+          <p>CopyRight Infratop.inc</p>
+         </div>
+       <div class="col-md-4 w-100">
+       </div>
+     </div>
+   </div>
+  </body>
+</html>

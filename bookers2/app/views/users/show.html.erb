@@ -1,59 +1,68 @@
 <html>
   <body>
-    <%# 　プロフィール更新　バリデーションチェック　エラー　%>
-    <% if @user.errors.any? %>
-      <%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</p>
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1 w-100">
+        </div>
+        <div class="col-md-3 w-100">
+          <%# 　プロフィール更新　バリデーションチェック　エラー　%>
+          <% if @user.errors.any? %>
+            <%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</p>
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
           <% end %>
-        </ul>
-    <% end %>
-    <%# プロフィール編集サクセスメッセージ・エラーメッセージ %>
-    <% if flash[:success] %>
-      <%= flash[:success] %>
-    <% end %>
-    <% if flash[:danger] %>
-      <%= flash[:danger] %>
-    <% end %>
+          <%# プロフィール編集サクセスメッセージ・エラーメッセージ %>
+          <% if flash[:success] %>
+            <%= flash[:success] %>
+          <% end %>
+          <% if flash[:danger] %>
+            <%= flash[:danger] %>
+          <% end %>
 
-    <%# 共通部分　↓　%>
-    <%#　プロフィール編集　%>
-    <h2>User Info</h2>
-    <%= attachment_image_tag @user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
-    <p>name<%= @user.name %></p>
-    <p>introduction<%= @user.introduction %></p>
-     <% if @user.id == current_user.id %>
-         <button><a href=/users/<%= current_user.id %>/edit><i class="fas fa-user-cog"></i></a></button>
-     <% end %>
-    <%# 新規投稿 %>
-    <div>
-    <%= form_with model: @new_book, local:true do |f| %>
-      <h2>New Book</h2>
-      <h4>title</h4>
-      <%= f.text_field :title %>
-      <h4>opinion</h4>
-      <%= f.text_area :body %>
-      <p><%= f.submit 'Create Book' %></p>
-    <% end %>
+          <%# 共通部分　↓　%>
+          <%#　プロフィール編集　%>
+          <h2>User Info</h2>
+          <%= attachment_image_tag @user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
+          <p class="w-75 border-top border-bottom">name<%= @user.name %></p>
+          <p class="w-75">introduction<%= @user.introduction %></p>
+            <% if @user.id == current_user.id %>
+              <button class="w-75 bg-light"><a href=/users/<%= current_user.id %>/edit"><i class="fas fa-user-cog text-secondary"></i></a></button>
+            <% end %>
+          <%# 新規投稿 %>
+          <%= form_with model: @new_book, local:true do |f| %>
+            <h4>New Book</h4>
+            <p>title</p>
+            <%= f.text_field :title %>
+            <p>opinion</p>
+            <%= f.text_area :body %>
+            <p><%= f.submit 'Create Book', class:"bg-success text-light"%></p>
+          <% end %>
+        </div>
+        <%# 共通部分　↑ %>
+
+        <%# 投稿一覧 %>
+        <div class="col-md-8">
+          <h2>Books</h2>
+          <table class="w-100">
+            <tr class="border-top border-bottom ">
+              <th colspan="1"></th>
+              <th>title</th>
+              <th>opinion</th>
+            </tr>
+          <% @books.each do |book|%>
+            <tr>
+              <td><%= attachment_image_tag @user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
+              <td><%= link_to "#{book.title}",book_path(book) %></td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+          </table>
+        </div>
+      </div>
     </div>
-    <%# 共通部分　↑ %>
-
-    <%# 投稿一覧 %>
-    <h2>Books</h2>
-    <table>
-      <tr>
-        <th colspan="1"></th>
-        <th>title</th>
-        <th>opinion</th>
-      </tr>
-      <% @books.each do |book|%>
-      <tr>
-        <td><%= attachment_image_tag @user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
-        <td><%= link_to "#{book.title}",book_path(book) %></td>
-        <td><%= book.body %></td>
-      </tr>
-      <% end %>
-    </table>
+    <p class= 'text-center pt-5'> CopyRight Infratop.inc</p>
   </body>
 </html>
