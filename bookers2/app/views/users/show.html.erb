@@ -1,64 +1,59 @@
-<%# 　プロフィール更新　バリデーションチェック　エラー　%>
-<% if @user.errors.any? %>
-  <%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</p>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-<% end %>
+<html>
+  <body>
+    <%# 　プロフィール更新　バリデーションチェック　エラー　%>
+    <% if @user.errors.any? %>
+      <%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</p>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <%# プロフィール編集サクセスメッセージ・エラーメッセージ %>
+    <% if flash[:success] %>
+      <%= flash[:success] %>
+    <% end %>
+    <% if flash[:danger] %>
+      <%= flash[:danger] %>
+    <% end %>
 
-
-<%# プロフィール編集サクセスメッセージ・エラーメッセージ %>
-
-<% if flash[:success] %>
-<%= flash[:success] %>
-<% end %>
-
-<% if flash[:danger] %>
-<%= flash[:danger] %>
-<% end %>
-<%# 共通部分　↓　%>
-
-<%#　プロフィール編集　%>
-<h2>User Info</h2>
-<%= attachment_image_tag @user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
-<p>name<%= @user.name %></p>
-<p>introduction<%= @user.introduction %></p>
- <% if @user.id == current_user.id %>
-   <button><%= link_to "Edit",edit_user_path(current_user.id) %></button>
-  <% end %>
-
-
-
-<%# 新規投稿 %>
-  <div>
+    <%# 共通部分　↓　%>
+    <%#　プロフィール編集　%>
+    <h2>User Info</h2>
+    <%= attachment_image_tag @user, :profile_image, size: "60x60", fallback: "no_image.jpg"%>
+    <p>name<%= @user.name %></p>
+    <p>introduction<%= @user.introduction %></p>
+     <% if @user.id == current_user.id %>
+         <button><a href=/users/<%= current_user.id %>/edit><i class="fas fa-user-cog"></i></a></button>
+     <% end %>
+    <%# 新規投稿 %>
+    <div>
     <%= form_with model: @new_book, local:true do |f| %>
       <h2>New Book</h2>
       <h4>title</h4>
       <%= f.text_field :title %>
       <h4>opinion</h4>
       <%= f.text_area :body %>
-    <p><%= f.submit 'Create Book' %></p>
+      <p><%= f.submit 'Create Book' %></p>
     <% end %>
-  </div>
+    </div>
+    <%# 共通部分　↑ %>
 
-<%# 共通部分　↑ %>
-
-<%# 投稿一覧 %>
- <h2>Books</h2>
-
-<table>
-  <tr>
-    <th colspan="1"></th>
-    <th>title</th>
-    <th>opinion</th>
-  </tr>
-  <% @books.each do |book|%>
-  <tr>
-    <td><%= attachment_image_tag @user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
-    <td><%= link_to "#{book.title}",book_path(book) %></td>
-    <td><%= book.body %></td>
-  </tr>
-  <% end %>
-</table>
+    <%# 投稿一覧 %>
+    <h2>Books</h2>
+    <table>
+      <tr>
+        <th colspan="1"></th>
+        <th>title</th>
+        <th>opinion</th>
+      </tr>
+      <% @books.each do |book|%>
+      <tr>
+        <td><%= attachment_image_tag @user, :profile_image,size: "60x60",fallback:"no_image.jpg"%></td>
+        <td><%= link_to "#{book.title}",book_path(book) %></td>
+        <td><%= book.body %></td>
+      </tr>
+      <% end %>
+    </table>
+  </body>
+</html>
