@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
 before_action :authenticate_user!
 
+before_action :correct,only: [:edit]
+
   def index
     @book=Book.new
     @users=User.all
@@ -9,7 +11,6 @@ before_action :authenticate_user!
 
   def show
     @new_book=Book.new
-    @book = Book.find(params[:id])
     @user=User.find(params[:id])
     @books =@user.books
   end
@@ -19,6 +20,13 @@ before_action :authenticate_user!
     new_book.user_id=current_user.id
     new_book.save
     redirect_to book_path(book.id)
+  end
+
+  def      correct
+           @user=User.find(params[:id])
+    unless @user.id == current_user.id
+           redirect_to user_path(current_user.id)
+    end
   end
 
   def edit
@@ -36,7 +44,7 @@ before_action :authenticate_user!
       redirect_to user_path(current_user.id)
     else
       flash[:danger] = "update error"
-      render:show
+      render:edit
     end
   end
 

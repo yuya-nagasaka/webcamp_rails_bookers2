@@ -2,21 +2,17 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-4 w-100">
-        </div>
-        <div class="col-md-4 w-100">
-          <h2>Editing book</h2>
+        <div class="col-md-4 offset-md-4 w-100">
+          <h2>Editing Book</h2>
           <%=form_with model:@book,local:true do |f|%>
-            <p>title</p>
-            <%= f.text_field :title,clas:"w-100" %>
-            <p>opinion</p>
-            <%= f.text_field :body,clas:"w-100" %>
-            <p><%= f.submit 'Update Book' %></p>
+            <p>Title</p>
+            <%= f.text_field :title,class:"w-100 rounded border border-muted" %>
+            <p class="pt-2">Opinion</p>
+            <%= f.text_area :body,class:"w-100 rounded border border-muted" %>
+            <p><%= f.submit 'Update Book',class:"bg-success text-white mt-3 rounded border-0 pt-1 pb-1" %></p>
           <% end %>
-          <%= link_to"show",book_path(@book) %>|<%= link_to"back",books_path %>
-          <p>CopyRight Infratop.inc</p>
-        </div>
-        <div class="col-md-4 w-100">
+          <%= link_to"Show",book_path(@book) %>|<%= link_to"Back",books_path %>
+          <p class="text-center pt-5">CopyRight Infratop.inc</p>
         </div>
       </div>
     </div>

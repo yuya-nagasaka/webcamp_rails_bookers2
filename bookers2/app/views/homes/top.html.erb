@@ -1,20 +1,22 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css"> <!-- 追加 -->
-  </head>
   <body>
-    <% if notice %>
-    <p><%= notice %></p>
-    <% end %>
-    <div class="mx-auto" style="width: 550px;" >
-      <h2>welcome to <i class="fas fa-book"></i>Bookers !!</h2>
-      <p >In<i class="fas fa-book"></i> <steong>Bookers</strong>,</br>
-      <br>you can share and exchange your opinions , inpressions , and emotions</br>
-      <br>about various books!</br></p>
-
-      <p><%= link_to "Log in", new_user_session_path, class: 'w-75 nav-link bg-info text-light text-center '  %></p>
-      <p><%= link_to "Sign up",new_user_registration_path, class: 'w-75 nav-link bg-success text-light text-center  ' %></p>
-      <p class= 'text-center pt-5'> CopyRight Infratop.inc</p>
+    <div class="success_message">
+      <% if notice %>
+      <p><%= notice %></p>
+      <% end %>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h2>welcome to <i class="fas fa-book"></i>Bookers !!</h2>
+          <p>In<i class="fas fa-book"></i><strong>Bookers</strong>,</br>
+          <br>you can share and exchange your opinions , inpressions , and emotions</br>
+          <br>about various books!</br></p>
+          <p><%= link_to "Log in", new_user_session_path, class: 'w-100 nav-link bg-info text-light text-center '  %></p>
+          <p><%= link_to "Sign up",new_user_registration_path, class: 'w-100 nav-link bg-success text-light text-center  ' %></p>
+          <p class= 'text-center pt-5'> CopyRight Infratop.inc</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

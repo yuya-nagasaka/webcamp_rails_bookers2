@@ -2,6 +2,10 @@ class BooksController < ApplicationController
 
 before_action :authenticate_user!
 
+before_action :correct,only: [:edit]
+
+
+
   def index
     @book=Book.new
     @books=Book.all
@@ -18,13 +22,20 @@ before_action :authenticate_user!
        flash[:danger] = "posting error"
        render:index
     end
-
   end
 
   def show
     @new_book=Book.new
     @book = Book.find(params[:id])
   end
+
+  def      correct
+           @book = Book.find(params[:id])
+    unless @book.user.id == current_user.id
+           redirect_to books_path
+    end
+  end
+
 
   def edit
     @book = Book.find(params[:id])
